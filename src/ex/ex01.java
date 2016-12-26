@@ -7,11 +7,60 @@
  * Author: 1050210XX 周永振老師
  */
 
+import java.util.Scanner;
+
 public class ex01 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		Scanner scn = new Scanner(System.in);
+		int var = scn.nextInt();
+		int[] data = new int[var];
+		for(int i=0;i<var;i++){
+			data[i] = scn.nextInt();
+			if(data[i]>=10000 && data[i]<=999){
+				System.out.println("不合法的輸入 請重新輸入");
+				i--;
+			}
+		}
+		int[] data1 = new int[var];
+		int[] data_ch = new int[var];
+		for(int i=0;i<var;i++){
+			data1[i] = data[i];
+		}
+		for(int i=0;i<var;i++){
+			for(int j=0;j<=3;j++){
+				data_ch[i] = data_ch[i] + data[i]%10;
+				data[i] /= 10;
+			}
+		}
+		int stop;
+		for(int i=0;i<var-1;i++){
+			for(int j=0;j<var-i-1;j++){
+				if(data_ch[j]>data_ch[j+1]){
+					stop = data_ch[j];
+					data_ch[j] = data_ch[j+1];
+					data_ch[j+1] = stop;
+					stop = data1[j];
+					data1[j] = data1[j+1];
+					data1[j+1] = stop;
+				}
+			}
+		}
+		for(int i=0;i<var-1;i++){
+			for(int j=0;j<var-i-1;j++){
+				if(data_ch[j] == data_ch[j+1]){
+					if(data1[j]>data1[j+1]){
+						stop = data1[j];
+						data1[j] = data1[j+1];
+						data1[j+1] = stop;
+					}
+				}
+			}
+		}
+		for(int i=0;i<var;i++){
+			System.out.print(data1[i] + " ");
+		}
 	}
 
 }
